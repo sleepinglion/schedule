@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <article class="col-12">
+      <h2 class="float-left hidden-title"><%= t(:operator_list) %></h2>
+      <div class="float-right">
+        <p class="summary">
+          <span id="list_count" style="display:none"><%= @operator_count %></span>
+          <%= raw t(:there_are_n_operators, count: @operator_count) %>
+        </p>
+      </div>
+      <table class="table table-striped table-hover">
+        <colgroup>
+          <col style="width:120px">
+          <col>
+          <col>
+          <col>
+          <% if can?(:update, Operator) || can?(:delete, Operator) %>
+            <col<%=manage_width(Operator) %>>
+          <% end  %>
+        </colgroup>
+        <thead class="thead-default">
+        <tr>
+          <th><%= t(:email,scope:[:activerecord,:attributes,:operator]) %></th>
+          <th><%= t(:name,scope:[:activerecord,:attributes,:operator]) %></th>
+          <th class="text-right"><%= t(:sign_in_count,scope:[:activerecord,:attributes,:operator]) %></th>
+          <th class="text-right"><%= t(:updated_at,scope:[:activerecord,:attributes,:operator]) %></th>
+          <% if can?(:update, Operator) || can?(:delete, Operator) %>
+            <th class="text-center"><%= t(:manage) %></th>
+          <% end  %>
+        </tr>
+        </thead>
+        <tbody>
+        <% unless @operators.empty? %>
+          <% @operators.each_with_index do |operator,index| %>
+            <tr>
+              <td><%= operator.email %></td>
+              <td><%= operator.name %></td>
+              <td class="text-right"><%= operator.sign_in_count %></td>
+              <td class="text-right"><%= I18n.l operator.created_at.to_date, :format => :long %></td>
+              <% if can?(:update, operator) or can?(:delete, operator) %>
+                <td class="text-right">
+                  <% if can? :update, operator %>
+                    <%= link_to edit_admin_operator_path(operator), :class => "btn btn-secondary" do %>
+                      <%= t(:edit) %>
+                    <% end %>
+                  <% end %>
+                  <% unless operator.id %>
+                  <% if can? :delete, operator %>
+                    <%= link_to new_admin_operator_path(operator), :method => :delete, :data => { :confirm => t(:delete_cascade_confirm) }, :class => "btn btn-danger" do %>
+                      <%= t(:delete) %>
+                    <% end %>
+                  <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5" class="text-center"><%= t(:no_data) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @operators %>
+      <%= link_to t(:add), new_admin_operator_path, :class => "btn btn-primary" %>
+    </article>
+  </div>
+</div>

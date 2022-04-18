@@ -1,0 +1,38 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <h1 class="col-12 col-lg-3">
+        <%= link_to root_path do %>
+          <span class="logo"><%= t(:service_name) %></span>
+        <% end %>
+      </h1>
+      <nav class="col-12 col-lg-9">
+        <ul class="nav nav-pills">
+          <li>
+          </li>
+          <% if admin_signed_in? %>
+            <li class="sl-dropdown-menu
+              <% if current_page? users_path %> active
+              <% end %>">
+              <%= link_to t(:menu_mypage), users_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <ul id="top-menu">
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to destroy_admin_session_path, :id => "p_logout" do %>
+          <i class="material-icons">highlight_off</i><span><%= t(:logout) %></span>
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to new_admin_session_path do %>
+          <i class="material-icons">login</i><span><%= t(:login) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</header>

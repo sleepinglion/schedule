@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div <% if ['users/sessions','users/registrations'].include? params[:controller] %>class="col-12 col-lg-8 col-xl-6 col-xxl-5" style="margin:0px auto"<% else %>class="col-12""<%  end %>">
+      <div class="page-header" itemscope itemtype="http://schema.org/WebPage">
+        <h1 itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <span itemprop="headline">
+          <% if @page_title %>
+          <%=@page_title %>
+            <% else %>
+          <%= t(controller_name.singularize,scope:[:activerecord,:models]) %>
+            <% end %>
+        </span></h1>
+        <%= breadcrumbs :semantic => true %>
+        <div style="height:1px;clear:both">&nbsp;</div>
+      </div>
+      <%= render :partial => 'layouts/notice' %>
+    </div>
+  </div>
+</div>

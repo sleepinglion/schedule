@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="<%=I18n.locale %>">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="<%=t(:site_full_url) %>">
+<link rel="alternate" type="application/rss+xml" title="Mask RSS Feed" href="<%= t(:site_full_url) %>/feed?format=rss">
+<%= stylesheet_link_tag "front/application", :media => "all", "data-turbolinks-track" => true %>
+<%= favicon_link_tag 'favicon.ico' %>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag -%>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<![endif]-->
+</head>
+<body>
+<%= render :partial => 'layouts/header' %>
+<div id="mom">
+  <div id="main">
+    <% unless current_page?(root_path) %>
+    <%= render :partial => 'layouts/page_header' %>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+<%= render :partial => 'layouts/footer' %>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"></div>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>
