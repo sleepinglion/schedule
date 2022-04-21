@@ -3,16 +3,17 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-//require("@rails/ujs").start()
+require("@rails/ujs").start()
 //require("turbolinks").start()
 ///require("@rails/activestorage").start()
 //require("channels")
-require("jquery");
+require("jquery")
 require("jquery-ui")
-require("bootstrap");
-// require("jquery-tagcanvas");
-// require("./jquery.lazyload.min");
-// require("./jquery.uri");
-// require("jquery.easing");
-// require("@fancyapps/fancybox");
-require("./index");
+require("bootstrap")
+
+import I18n from 'i18n-js'
+window.I18n = I18n
+
+require("./jquery.pagination")
+require("./common")
+require("./index")
