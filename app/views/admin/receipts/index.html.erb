@@ -1,0 +1,58 @@
+<section id="receipts" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="float-left hidden-title"><%= t(:receipt_list) %></h2>
+      <div class="float-right">
+        <p class="summary">
+          <span id="list_count" style="display:none"><%= @receipt_count %></span>
+          <%= raw t(:there_are_n_receipts, count: @receipt_count) %>
+        </p>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <colgroup>
+          <col>
+          <% if can?(:update, Receipt) or can?(:delete, Receipt) %>
+            <col<%= manage_width(Receipt) %>>
+          <% end %>
+        </colgroup>
+        <thead class="thead-default">
+        <tr>
+          <th><%= t(:title, scope: [:activerecord, :attributes, :receipt]) %></th>
+          <th class="text-center"><%= t(:manage) %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% unless @receipts.empty? %>
+          <% @receipts.each_with_index do |receipt, index| %>
+            <tr>
+              <td><%= link_to receipt.title, admin_receipt_path(receipt) %></td>
+              <% if can?(:update, receipt) or can?(:delete, receipt) %>
+                <td class="text-center">
+                  <% if can? :update, receipt %>
+                    <%= link_to edit_admin_receipt_path(receipt), :class => "btn btn-secondary" do %>
+                      <%= t(:edit) %>
+                    <% end %>
+                  <% end %>
+                  <% if can? :delete, receipt %>
+                    <%= link_to admin_receipt_path(receipt), :method => :delete, :data => { :confirm => t(:delete_cascade_confirm) }, :class => "btn btn-danger" do %>
+                      <%= t(:delete) %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @receipts %>
+    </div>
+    <% if can? :create, Receipt %>
+    <div class="col-12">
+      <%= link_to t(:add), new_admin_receipt_path, :class => "btn btn-primary" %>
+    </div>
+    <% end  %>
+  </div>
+</section>

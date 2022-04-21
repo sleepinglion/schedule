@@ -26,10 +26,10 @@
         <tr>
           <th class="text-center"><%=t(:transaction_date,scope:[:activerecord,:attributes,:account]) %></th>
           <th><%=t(:user_id,scope:[:activerecord,:attributes,:account]) %></th>
-          <th><%=t(:order_id,scope:[:activerecord,:attributes,:account]) %></th>
+          <th><%=t(:order_number,scope:[:activerecord,:attributes,:account]) %> / <%=t(:order_title,scope:[:activerecord,:attributes,:account]) %></th>
           <th><%=t(:account_category_id,scope:[:activerecord,:attributes,:account]) %></th>
           <th><%=t(:title,scope:[:activerecord,:attributes,:account]) %></th>
-          <th class="text-right"><%=t(:amount) %></th>
+          <th class="text-right"><%=t(:payment,scope:[:activerecord,:attributes,:account]) %></th>
           <% if can?(:update, @account) or can?(:delete, @account) %>
           <th class="text-center"><%=t(:manage) %></th>
           <% end  %>
@@ -39,15 +39,12 @@
         <% unless @accounts.empty? %>
           <% @accounts.each do |account| %>
         <tr>
-          <td class="text-center"><%= I18n.l account.transaction_date, :format => :long %></td>
+          <td><%= link_to  I18n.l(account.transaction_date, :format => :long), admin_account_path(account) %></td>
           <td><%=account.user.name %></td>
-          <td><%=account.orders[0].title %></td>
+          <td><%=account.order.number %> / <%=account.order.title %></td>
           <td><%=account.account_category.title %></td>
-          <td class="text-right">
-            <%=account.title %>
-          </td>
-          <td class="text-right">
-          </td>
+          <td><%=account.title %></td>
+          <td class="text-right"><%=number_to_currency (account.payment) %></td>
           <% if can?(:update, account) or can?(:delete, account) %>
             <td class="text-right">
               <% if can? :update, account %>
@@ -71,18 +68,14 @@
         <% end %>
         </tbody>
       </table>
-    </article>
-    <article class="col-12">
-      <table class="table table-striped table-hover">
-        <tr>
-          <td width='50%'></td>
-          <td>
-          </td>
-          <td width='20%'></td>
-        </tr>
       </table>
-        <%= paginate @accounts %>
-    </article>
+      <%= paginate @accounts %>
+  </article>
+  <% if can? :create, Account %>
+    <div class="col-12">
+      <%= link_to t(:add), new_admin_account_path, :class => "btn btn-primary" %>
+    </div>
+  <% end  %>
   </div>
 </div>
 

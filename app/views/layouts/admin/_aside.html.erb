@@ -1,0 +1,62 @@
+<aside id="main-menu" class="col-12 col-md-2 col-xxl-1">
+  <h1 class="col-12"><%= link_to params[:controller], new_admin_order_path %></h1>
+  <nav>
+    <ul class="nav">
+      <li class="nav-item
+            <% if ['admin/reservations'].include?(params[:controller]) %> active
+            <% end %>">
+        <%= link_to raw('<i class="material-icons">schedule</i>'+t(:reservation, scope: [:activerecord, :models])),admin_reservations_path,:class => "nav-link"  %>
+      </li>
+      <li class="nav-item
+            <% if ['admin/orders'].include?(params[:controller]) %> active
+            <% end %>">
+        <%= link_to raw('<i class="material-icons">shopping_cart</i>'+t(:order, scope: [:activerecord, :models])),admin_orders_path,:class => "nav-link"  %>
+      </li>
+      <li class="nav-item
+            <% if ['admin/accounts'].include?(params[:controller]) %> active
+            <% end %>">
+        <%= link_to raw('<i class="material-icons">attach_money</i>'+t(:account, scope: [:activerecord, :models])),admin_accounts_path,:class => "nav-link"  %>
+      </li>
+      <li class="nav-item
+            <% if ['admin/users','admin/operators'].include?(params[:controller]) %> active
+            <% end %>">
+        <%= link_to '#', :class => "nav-link dropdown-toggle", :'data-toggle' => "dropdown", :role => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false" do %>
+          <i class="material-icons">group</i><span><%= t(:user, scope: [:activerecord, :models]) %></span>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li<% if params[:controller] == 'admin/users' %> class="active"<% end %>>
+            <%= link_to admin_users_path, :class => "nav-link" do %>
+              <i class="material-icons">person</i><span><%= t(:user, scope: [:activerecord, :models]) %></span>
+            <% end %>
+          </li>
+          <li
+            <% if params[:controller] == 'admin/operators' %> class="active"
+            <% end %>>
+            <%= link_to admin_operators_path, :class => "nav-link" do %>
+              <i class="material-icons">cleaning_services</i><span><%= t(:operator, scope: [:activerecord, :models]) %></span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item
+          <% if ['admin/branches','admin/receipts'].include?(params[:controller]) %> active
+          <% end %>">
+        <%= link_to '#', :class => "nav-link dropdown-toggle", :'data-toggle' => "dropdown", :role => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false" do %>
+          <i class="material-icons">settings</i><span><%= t(:setting, scope: [:activerecord, :models]) %></span>
+        <% end %>
+        <ul class="dropdown-menu">
+          <li<% if params[:controller] == 'admin/branches' %> class="active"<% end %>>
+            <%= link_to admin_branches_path, :class => "nav-link" do %>
+              <i class="material-icons">slideshow</i><span><%= t(:branch, scope: [:activerecord, :models]) %></span>
+            <% end %>
+          </li>
+          <li<% if params[:controller] == 'admin/receipts' %> class="active"<% end %>>
+            <%= link_to admin_receipts_path, :class => "nav-link" do %>
+              <i class="material-icons">slideshow</i><span><%= t(:receipt, scope: [:activerecord, :models]) %></span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</aside>

@@ -41,16 +41,13 @@
 <%= form_with( method: "get", class: "card", id: "account_search_form") do %>
 <div class="card-body">
   <div class="col-12 form-group">
-    <label for="s_product"><%=t(:product,scope:[:activerecord,:models]) %></label>
-    <div class="form-row">
-      <div class="col-12 col-lg-6">
-      <%= select_tag :account_category_id,options_from_collection_for_select(AccountCategory.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
-      </div>
-      <div class="col-12 col-lg-6">
-      <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
-      </div>
-    </div>
+        <label for="s_product"><%=t(:order,scope:[:activerecord,:models]) %></label>
+      <%= select_tag :order_id,options_from_collection_for_select(Order.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
   </div>
+  <div class="col-12 form-group">
+        <label for="s_product"><%=t(:account_category,scope:[:activerecord,:models]) %></label>
+        <%= select_tag :account_category_id,options_from_collection_for_select(AccountCategory.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+      </div>
   <div id="default_period_form" class="col-12 form-group">
     <label for="start_date"><%=t(:transaction_date) %></label>
     <div class="form-row">

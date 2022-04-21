@@ -40,6 +40,10 @@
 %>
 <%= form_with( method: "get", class: "card") do %>
 <div class="card-body">
+  <div class="col-12 form-group">
+    <label for="s_product"><%=t(:receipt,scope:[:activerecord,:models]) %></label>
+    <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+  </div>
   <div id="default_period_form" class="col-12 form-group">
     <label for="start_date"><%=t(:transaction_date) %></label>
     <div class="form-row">

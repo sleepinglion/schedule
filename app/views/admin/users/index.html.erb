@@ -15,6 +15,7 @@
           <col>
           <col>
           <col>
+          <col>
           <% if can?(:update, User) || can?(:delete, User) %>
             <col<%= manage_width(User) %>>
           <% end %>
@@ -25,6 +26,7 @@
           <th><%= t(:name, scope: [:activerecord, :attributes, :user]) %></th>
           <th class="text-right"><%= t(:phone, scope: [:activerecord, :attributes, :user]) %></th>
           <th class="text-right"><%= t(:address, scope: [:activerecord, :attributes, :user]) %></th>
+          <th class="text-right"><%= t(:orders_count, scope: [:activerecord, :attributes, :user]) %></th>
           <th class="text-right"><%= t(:updated_at, scope: [:activerecord, :attributes, :user]) %></th>
           <% if can?(:update, User) || can?(:delete, User) %>
             <th class="text-center"><%= t(:manage) %></th>
@@ -56,6 +58,7 @@
                   <%= t(:not_insert) %>
                 <% end %>
               </td>
+              <td class="text-right"><%=  user.orders_count %></td>
               <td class="text-right"><%= I18n.l user.created_at.to_date, :format => :long %></td>
               <% if can?(:update, user) or can?(:delete, user) %>
                 <td class="text-right">

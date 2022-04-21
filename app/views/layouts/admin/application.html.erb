@@ -15,22 +15,22 @@
   <![endif]-->
 </head>
 <body>
-<%= render :partial => 'layouts/admin/header' %>
-<div id="mom">
-  <div id="main">
-    <div class="sub_main">
-      <div id="message-container" class="container">
-        <div class="row">
-          <div class="col-12">
-            <%= render :partial => 'layouts/notice', :locals=>{:notice=>notice,:alert=>alert} %>
+<div class="container-fluid">
+  <div class="row">
+    <%= render :partial => 'layouts/admin/aside' %>
+    <div class="col-12 col-md-10 col-xxl-11">
+      <%= render :partial => 'layouts/admin/header' %>
+      <div id="mom" class="row">
+        <div id="main" class="col-12">
+          <div class="sub_main">
+            <%= yield %>
           </div>
         </div>
       </div>
-      <%= yield %>
+      <%= render :partial => 'layouts/admin/footer' %>
     </div>
   </div>
 </div>
-<%= render :partial => 'layouts/admin/footer' %>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"></div>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>

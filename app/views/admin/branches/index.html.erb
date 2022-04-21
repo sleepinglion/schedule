@@ -29,9 +29,7 @@
         <% unless @branches.empty? %>
           <% @branches.each_with_index do |branch, index| %>
             <tr>
-              <td>
-                <%=branch.title %>
-              </td>
+              <td><%= link_to branch.title, admin_branch_path(branch) %></td>
               <td>
                 <% if branch.description.present? %>
                 <%=branch.description %>

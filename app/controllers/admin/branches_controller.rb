@@ -6,10 +6,8 @@ class Admin::BranchesController < Admin::AdminController
   def index
     params[:per_page] = 10 unless params[:per_page].present?
 
-    condition = { enable: true}
-
-    @branch_count = Branch.where(condition).count
-    @branches = Branch.where(condition).page(params[:page]).per(params[:per_page]).order('id desc')
+    @branch_count = Branch.count
+    @branches = Branch.page(params[:page]).per(params[:per_page]).order('id desc')
   end
 
   # GET /branches/1
@@ -48,7 +46,7 @@ class Admin::BranchesController < Admin::AdminController
     respond_to do |format|
       if @branch.update(branch_params)
         format.html { redirect_to [:admin, @branch], notice: 'user was successfully updated.' }
-        format.json { render :show, status: :ok, location: @point }
+        format.json { render :show, status: :ok, location: @branch }
       else
         format.html { render :edit }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
@@ -74,6 +72,6 @@ class Admin::BranchesController < Admin::AdminController
 
   # Only allow a list of trusted parameters through.
   def branch_params
-    params.require(:branch).permit(:company_id, :title, :enable, branch_setting_payments_attributes: [:payment_id], branch_picture_attributes: [:picture])
+    params.require(:branch).permit(:title, :description, :enable, branch_picture_attributes: [:picture])
   end
 end
