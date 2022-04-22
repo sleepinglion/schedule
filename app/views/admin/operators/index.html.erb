@@ -20,6 +20,7 @@
         </colgroup>
         <thead class="thead-default">
         <tr>
+          <th class="text-center"><%= t(:enable, scope: [:activerecord, :attributes, :user]) %></th>
           <th><%= t(:email,scope:[:activerecord,:attributes,:operator]) %></th>
           <th><%= t(:name,scope:[:activerecord,:attributes,:operator]) %></th>
           <th class="text-right"><%= t(:sign_in_count,scope:[:activerecord,:attributes,:operator]) %></th>
@@ -33,6 +34,12 @@
         <% unless @operators.empty? %>
           <% @operators.each_with_index do |operator,index| %>
             <tr>
+              <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="user_display<%=index %>" value="<%=operator.id %>" <% if operator.enable %> checked<% end %>>
+                  <label class="custom-control-label" for="user_display<%=index %>"><% if operator.enable %> <%=t(:enable) %><% else %><%=t(:disable) %><% end %> </label>
+                </div>
+              </td>
               <td><%= operator.email %></td>
               <td><%= operator.name %></td>
               <td class="text-right"><%= operator.sign_in_count %></td>

@@ -17,6 +17,7 @@
         <col>
         <col>
         <col>
+        <col>
         <% if can?(:update, Order) || can?(:delete, Order) %>
           <col<%=manage_width(Order) %>>
         <% end  %>
@@ -24,11 +25,12 @@
       <thead class="thead-default">
       <tr>
         <th><%=t(:number,scope:[:activerecord,:attributes,:order]) %></th>
+        <th><%=t(:title,scope:[:activerecord,:attributes,:order]) %></th>
         <th><%=t(:user_id,scope:[:activerecord,:attributes,:order]) %></th>
         <th><%=t(:branch_id,scope:[:activerecord,:attributes,:order]) %></th>
         <th class="text-right"><%=t(:total_payment,scope:[:activerecord,:attributes,:order]) %></th>
-        <th class="text-right d-none d-sm-table-cell"><%=t(:last_transaction_date,scope:[:activerecord,:attributes,:order]) %></th>
-        <th class="text-right d-none d-sm-table-cell"><%=t(:created_at,scope:[:activerecord,:attributes,:order]) %></th>
+        <th><%=t(:receipt_id,scope:[:activerecord,:attributes,:order]) %></th>
+        <th class="text-right d-none d-sm-table-cell"><%=t(:contract_date,scope:[:activerecord,:attributes,:order]) %></th>
         <% if can?(:update, Order) || can?(:delete, Order) %>
         <th class="text-center"><%=t(:manage) %></th>
         <% end  %>
@@ -38,14 +40,21 @@
       <% unless @orders.empty? %>
         <% @orders.each do |order| %>
       <tr>
-        <td><%=order.number %></td>
+        <td><%= link_to order.number,admin_order_path(order) %></td>
+        <td><%=order.title %></td>
         <td><%=order.user.name %></td>
         <td><%=order.branch.title %></td>
         <td class="text-right"<% unless order.enable %> style="text-decoration:line-through"<% end %>>
 
         </td>
-        <td class="text-right d-none d-sm-table-cell"></td>
-        <td class="text-right d-none d-sm-table-cell"><%= I18n.l order.created_at.to_datetime, :format => :short %></td>
+        <td>
+          <% if order.receipt.present? %>
+            <%= order.receipt.title %>
+          <% else %>
+            미발행
+          <% end %>
+        </td>
+        <td class="text-right d-none d-sm-table-cell"><%= I18n.l order.contract_date, :format => :long %></td>
         <% if can?(:update, order) or can?(:delete, order) %>
           <td class="text-right">
             <% if can? :update, order %>
@@ -71,4 +80,9 @@
     </table>
     <%= paginate @orders %>
   </article>
+  <% if can? :create, Order %>
+    <div class="col-12">
+      <%= link_to t(:add), new_admin_order_path, :class => "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

@@ -6,6 +6,7 @@ class Admin::OrdersController < Admin::AdminController
   def index
     params[:per_page] = 10 unless params[:per_page].present?
 
+    @order_count = Order.count
     @orders = Order.order('id desc').page(params[:page]).per(params[:per_page])
 
     respond_to do |format|
@@ -22,7 +23,7 @@ class Admin::OrdersController < Admin::AdminController
   # GET /order/new.json
   def new
     @order = Order.new
-    @order.build_shipping
+    @order.build_branch
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +41,7 @@ class Admin::OrdersController < Admin::AdminController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to admin_order_path(@order), notice: @controller_name + t(:message_success_insert) }
+        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
         format.html { render :new }
@@ -54,7 +55,7 @@ class Admin::OrdersController < Admin::AdminController
   def update
     respond_to do |format|
       if @order.update_attributes(order_params)
-        format.html { redirect_to admin_order_path(@order), notice: @controller_name + t(:message_success_update) }
+        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :edit }
@@ -83,6 +84,6 @@ class Admin::OrdersController < Admin::AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:user_id, :product_id, :payment_id, :total_price, :enable, :created_at, :updated_at, shipping_attributes: [:id, :name, :email, :phone, :zip_code, :address_default, :address_detail, :enable])
+    params.require(:order).permit(:user_id, :branch_id, :number, :title, :contract_date, :enable, :created_at, :updated_at)
   end
 end

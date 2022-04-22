@@ -1,8 +1,8 @@
 class Operator < ApplicationRecord
     self.table_name = 'admins'
     attr_accessor :password, :password_confirmation
-    validates_length_of :login_id, within: 4..40
-    validates_uniqueness_of :login_id, :name, :email
+    validates_length_of :email, within: 4..40
+    validates_uniqueness_of :name, :email
     validates_confirmation_of :password
     validates_length_of :password, within: 4..40, allow_blank: true
 
@@ -14,7 +14,7 @@ class Operator < ApplicationRecord
     def password=(pass)
         if pass.present?
             @password = pass
-            admin = Admin.new(login_id: login_id, password: pass)
+            admin = Admin.new(email: email, password: pass)
             self.encrypted_password = admin.encrypted_password
         end
     end

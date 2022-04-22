@@ -1,0 +1,64 @@
+<section id="reservations" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="float-left hidden-title"><%= t(:reservation_list) %></h2>
+      <div class="float-right">
+        <p class="summary">
+          <span id="list_count" style="display:none"><%= @reservation_count %></span>
+          <%= raw t(:there_are_n_reservations, count: @reservation_count) %>
+        </p>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <colgroup>
+          <col>
+          <col>
+          <% if can?(:update, Reservation) or can?(:delete, Reservation) %>
+            <col<%= manage_width(Reservation) %>>
+          <% end %>
+        </colgroup>
+        <thead class="thead-default">
+        <tr>
+          <th><%= t(:title, scope: [:activerecord, :attributes, :branch]) %></th>
+          <th><%= t(:description, scope: [:activerecord, :attributes, :branch]) %></th>
+          <th class="text-center"><%= t(:manage) %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% unless @reservations.empty? %>
+          <% @reservations.each_with_index do |reservation, index| %>
+            <tr>
+              <td>
+                <%=reservation.order.title %>
+              </td>
+              <td>
+              </td>
+              <% if can?(:update, reservation) or can?(:delete, reservation) %>
+                <td class="text-center">
+                  <% if can? :update, reservation %>
+                    <%= link_to edit_admin_reservation_path(reservation), :class => "btn btn-secondary" do %>
+                      <%= t(:edit) %>
+                    <% end %>
+                  <% end %>
+                  <% if can? :delete, reservation %>
+                    <%= link_to edit_admin_reservation_path(reservation), :method => :delete, :data => { :confirm => t(:delete_confirm) }, :class => "btn btn-danger" do %>
+                      <%= t(:delete) %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @reservations %>
+    </div>
+    <% if can? :create, Reservation %>
+      <div class="col-12">
+        <%= link_to t(:add), new_admin_reservation_path, :class => "btn btn-primary" %>
+      </div>
+    <% end  %>
+  </div>
+</section>

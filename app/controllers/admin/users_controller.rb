@@ -6,10 +6,8 @@ class Admin::UsersController < Admin::AdminController
   def index
     params[:per_page] = 10 unless params[:per_page].present?
 
-    condition = { enable: true }
-
-    @user_count = User.where(condition).count
-    @users = User.where(condition).page(params[:page]).per(params[:per_page]).order('id desc')
+    @user_count = User.count
+    @users = User.page(params[:page]).per(params[:per_page]).order('id desc')
   end
 
   # GET /Users/1
@@ -33,7 +31,7 @@ class Admin::UsersController < Admin::AdminController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to [:admin, @user], notice: 'Gg was successfully created.' }
+        format.html { redirect_to [:admin, @user], notice: 'User was successfully created.'}
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -47,7 +45,7 @@ class Admin::UsersController < Admin::AdminController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to [:admin, @user], notice: 'User was successfully updated.' }
+        format.html { redirect_to [:admin, @user], notice: 'User was successfully updated.'}
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -61,7 +59,7 @@ class Admin::UsersController < Admin::AdminController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.'}
       format.json { head :no_content }
     end
   end

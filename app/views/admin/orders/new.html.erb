@@ -1,17 +1,13 @@
-<div id="order_add" class="container">
+<section id="new-order" class="container">
   <div class="row">
-    <%= render :partial => 'layouts/notice', :locals=>{:errors=>@order.errors, :notice=>notice,:alert=>alert} %>
+    <h2 class="col-12"><%= t(:new_order) %></h2>
   </div>
   <div class="row">
-    <%= render 'products/nav' %>
-    <%= render 'products/product_list' %>
-    <aside class="col-12 col-lg-4 left-form">
-      <article class="row">
-        <div class="col-12">
-          <%= render 'search_user_form' %>
-          <%= render 'form', order: @order %>
-        </div>
-      </article>
-    </aside>
+    <%= render :partial => 'layouts/notice', :locals => { :errors => @order.errors, :notice => notice, :alert => alert } %>
   </div>
-</div>
+  <div class="row">
+    <div class="col-12">
+      <%= render 'form', order: @order %>
+    </div>
+  </div>
+</section>

@@ -26,7 +26,9 @@ Rails.application.routes.draw do
     resources :accounts
     resources :users
     resources :orders
+    resources :reservations
     resources :operators
     resources :branches
+    resources :receipts
   end
 end

@@ -1,4 +1,32 @@
-<p id="notice"><%= notice %></p>
+<section id="show-order" class="container">
+  <div class="row">
+    <%= render :partial => 'layouts/notice', :locals => { :errors => @order.errors, :notice => notice, :alert => alert } %>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <article class="card">
+        <h3 class="card-header"><%=@order.title %></h3>
+        <div class="card-body">
+          <dl>
 
-<%= link_to 'Edit', edit_gg_path(@gg) %> |
-<%= link_to 'Back', ggs_path %>
+            <dt><%= t(:accounts_count, scope: [:activerecord, :attributes, :branch]) %></dt>
+            <dd><%= @order.accounts_count %></dd>
+            <dt><%= t(:created_at, scope: [:activerecord, :attributes, :product]) %></dt>
+            <dd><%= I18n.l @order.created_at.to_date, :format => :long %></dd>
+            <dt><%= t(:updated_at, scope: [:activerecord, :attributes, :product]) %></dt>
+            <dd><%= I18n.l @order.updated_at.to_date, :format => :long %></dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-xl-6">
+      <%= link_to t(:link_list), admin_accounts_path, class: 'btn btn-secondary' %>
+    </div>
+    <div class="col-12 col-xl-6 text-right">
+      <%= link_to t(:edit), edit_admin_account_path(@order), class: 'btn btn-secondary' %>
+      <%= link_to t(:delete), admin_account_path(@order), class: 'btn btn-danger' %>
+    </div>
+  </div>
+</section>

@@ -6,10 +6,8 @@ class Admin::OperatorsController < Admin::AdminController
     def index
         params[:per_page] = 10 unless params[:per_page].present?
 
-        condition = { enable: true }
-
-        @operator_count = Operator.where(condition).count
-        @operators = Operator.where(condition).page(params[:page]).per(params[:per_page]).order('id desc')
+        @operator_count = Operator.count
+        @operators = Operator.page(params[:page]).per(params[:per_page]).order('id desc')
     end
 
     def show; end
@@ -44,13 +42,13 @@ class Admin::OperatorsController < Admin::AdminController
         end
     end
 
-    # PUT /operators/1
-    # PUT /operators/1.json
+    # PATCH/PUT /operators/1
+    # PATCH/PUT /operators/1.json
     def update
         respond_to do |format|
             if @operator.update(operator_params)
-                format.html { redirect_to admin_operator_path(@operator), notice: @controller_name + t(:message_success_update) }
-                format.json { head :no_content }
+                format.html { redirect_to [:admin, @operator], notice: 'Operator was successfully updated.' }
+                format.json { render :show, status: :ok, location: @operator }
             else
                 format.html { render :edit }
                 format.json { render json: @operator.errors, status: :unprocessable_entity }
@@ -62,9 +60,8 @@ class Admin::OperatorsController < Admin::AdminController
     # DELETE /operators/1.json
     def destroy
         @operator.destroy
-
         respond_to do |format|
-            format.html { redirect_to admin_operators_path }
+            format.html { redirect_to admin_operators_url, notice: 'Operator was successfully destroyed.' }
             format.json { head :no_content }
         end
     end
@@ -78,6 +75,6 @@ class Admin::OperatorsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def operator_params
-        params.require(:operator).permit(:login_id, :parent_id, :nickname, :email, :password, :password_confirmation, :enable)
+        params.require(:operator).permit(:email, :password, :password_confirmation, :enable)
     end
 end

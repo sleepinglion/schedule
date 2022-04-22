@@ -3,7 +3,7 @@ class CreateAccounts < ActiveRecord::Migration[6.0]
     create_table :accounts do |t|
       t.references :account_category, :null => false
       t.references :user, :null => true
-      t.references :receipt, :null => true
+      t.references :order, :null => true
       t.string :title,:null=>false
       t.date :transaction_date, :null => false
       t.integer :origin_price, :null => false, :default => 0
