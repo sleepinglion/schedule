@@ -13,6 +13,7 @@
       <table class="table table-bordered table-hover">
         <colgroup>
           <col>
+          <col style="width:120px">
           <% if can?(:update, Receipt) or can?(:delete, Receipt) %>
             <col<%= manage_width(Receipt) %>>
           <% end %>
@@ -20,6 +21,7 @@
         <thead class="thead-default">
         <tr>
           <th><%= t(:title, scope: [:activerecord, :attributes, :receipt]) %></th>
+          <th><%= t(:orders_count, scope: [:activerecord, :attributes, :receipt]) %></th>
           <th class="text-center"><%= t(:manage) %></th>
         </tr>
         </thead>
@@ -28,6 +30,7 @@
           <% @receipts.each_with_index do |receipt, index| %>
             <tr>
               <td><%= link_to receipt.title, admin_receipt_path(receipt) %></td>
+              <td class="text-right"><%= receipt.orders_count %></td>
               <% if can?(:update, receipt) or can?(:delete, receipt) %>
                 <td class="text-center">
                   <% if can? :update, receipt %>

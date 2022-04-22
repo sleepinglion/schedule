@@ -14,6 +14,7 @@
         <colgroup>
           <col>
           <col>
+          <col style="width:120px">
           <% if can?(:update, Branch) or can?(:delete, Branch) %>
             <col<%= manage_width(Branch) %>>
           <% end %>
@@ -22,6 +23,7 @@
         <tr>
           <th><%= t(:title, scope: [:activerecord, :attributes, :branch]) %></th>
           <th><%= t(:description, scope: [:activerecord, :attributes, :branch]) %></th>
+          <th><%= t(:orders_count, scope: [:activerecord, :attributes, :branch]) %></th>
           <th class="text-center"><%= t(:manage) %></th>
         </tr>
         </thead>
@@ -35,6 +37,7 @@
                 <%=branch.description %>
                   <% end %>
               </td>
+              <td class="text-right"><%= branch.orders_count %></td>
               <% if can?(:update, branch) or can?(:delete, branch) %>
                 <td class="text-center">
                   <% if can? :update, branch %>

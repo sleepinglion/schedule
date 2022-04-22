@@ -1,27 +1,33 @@
 <header class="row">
   <div class="col-12">
-    <ul id="top-menu">
-      <% if admin_signed_in? %>
-        <li id="admin-info">
-          <%= link_to edit_admin_registration_path do %>
-            <% if current_admin.admin_picture.present? %>
-              <%= image_tag(current_admin.admin_picture.picture.small_thumb.url, { :height => 50, :width => 50 }) %>
-            <% end %>
-            <%= current_admin.name %>
+  <% if ['admin/users','admin/operators'].include?(params[:controller]) %>
+    <%= render 'admin/users/nav' %>
+  <% end %>
+  <% if ['admin/branches','admin/receipts'].include?(params[:controller]) %>
+    <%= render 'admin/branches/nav' %>
+  <% end %>
+  <ul id="top-menu">
+    <% if admin_signed_in? %>
+      <li id="admin-info">
+        <%= link_to edit_admin_registration_path do %>
+          <% if current_admin.admin_picture.present? %>
+            <%= image_tag(current_admin.admin_picture.picture.small_thumb.url, { :height => 50, :width => 50 }) %>
           <% end %>
-        </li>
-        <li>
-          <%= link_to destroy_admin_session_path, :id => "p_logout" do %>
-            <i class="material-icons" style="font-size:35px;vertical-align:middle">highlight_off</i><span><%= t(:logout) %></span>
-          <% end %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to new_admin_session_path do %>
-            <i class="material-icons">login</i><span><%= t(:login) %></span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+          <%= current_admin.name %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to destroy_admin_session_path, :id => "p_logout" do %>
+          <i class="material-icons" style="font-size:35px;vertical-align:middle">highlight_off</i><span><%= t(:logout) %></span>
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to new_admin_session_path do %>
+          <i class="material-icons">login</i><span><%= t(:login) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
   </div>
 </header>

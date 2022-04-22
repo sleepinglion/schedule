@@ -40,9 +40,21 @@
 %>
 <%= form_with( method: "get", class: "card") do %>
 <div class="card-body">
-  <div class="col-12 form-group">
-    <label for="s_product"><%=t(:receipt,scope:[:activerecord,:models]) %></label>
-    <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+  <div class="col-12">
+    <div class="form-row">
+      <div class="col-12 col-xxl-4 form-group"">
+    <label for="s_product"><%=t(:user,scope:[:activerecord,:models]) %></label>
+    <%= select_tag :receipt_id,options_from_collection_for_select(User.where(:enable=>true).all, 'id', 'name',nil),{:class=>"form-control",include_blank: t(:all)} %>
+      </div>
+      <div class="col-12 col-xl-6 col-xxl-4 form-group"">
+        <label for="s_product"><%=t(:branch,scope:[:activerecord,:models]) %></label>
+        <%= select_tag :receipt_id,options_from_collection_for_select(Branch.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+      </div>
+      <div class="col-12 col-xl-6 col-xxl-4 form-group"">
+        <label for="s_product"><%=t(:receipt,scope:[:activerecord,:models]) %></label>
+        <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+      </div>
+  </div>
   </div>
   <div id="default_period_form" class="col-12 form-group">
     <label for="start_date"><%=t(:transaction_date) %></label>

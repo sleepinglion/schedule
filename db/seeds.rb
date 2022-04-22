@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Admin.create!(:id=>1, :email => 'admin@a.com', :name => '잠자는사자', :password => 'a12345', :password_confirmation => 'a12345', admin_picture_attributes: { picture: File.open(Rails.root.join("app", "assets", "images", "dog.png")) })
+Admin.create!(:id=>1, :email => '1hourmart@1hourmart.kr', :name => '잠자는사자', :password => 'gkstlrks1!', :password_confirmation => 'gkstlrks1!', admin_picture_attributes: { picture: File.open(Rails.root.join("app", "assets", "images", "dog.png")) })
 Admin.create!(:id=>2, :email => 'admin2@a.com',:name=>'매점 관리자',:password => 'a12345', :password_confirmation => 'a12345')
 Admin.create!(:id=>3, :email => 'admin3@a.com',:name=>'매점 관리자',:password => 'a12345', :password_confirmation => 'a12345')
 

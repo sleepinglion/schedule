@@ -30,12 +30,9 @@
           <% @reservations.each_with_index do |reservation, index| %>
             <tr>
               <td>
-                <%=reservation.title %>
+                <%=reservation.order.title %>
               </td>
               <td>
-                <% if reservation.description.present? %>
-                  <%=reservation.description %>
-                <% end %>
               </td>
               <% if can?(:update, reservation) or can?(:delete, reservation) %>
                 <td class="text-center">

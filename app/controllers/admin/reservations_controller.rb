@@ -72,6 +72,6 @@ class Admin::ReservationsController < Admin::AdminController
 
   # Only allow a list of trusted parameters through.
   def reservation_params
-    params.require(:reservation).permit( :start_datetime, :end_datetime, :enable, order_attributes: [:order_id])
+    params.require(:reservation).permit( :start_datetime, :end_datetime, :enable, :order_id)
   end
 end
