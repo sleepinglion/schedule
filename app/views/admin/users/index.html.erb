@@ -25,8 +25,8 @@
           <th class="text-center"><%= t(:enable, scope: [:activerecord, :attributes, :user]) %></th>
           <th><%= t(:name, scope: [:activerecord, :attributes, :user]) %></th>
           <th class="text-right"><%= t(:phone, scope: [:activerecord, :attributes, :user]) %></th>
-          <th class="text-right"><%= t(:address, scope: [:activerecord, :attributes, :user]) %></th>
-          <th class="text-right"><%= t(:orders_count, scope: [:activerecord, :attributes, :user]) %></th>
+          <th class="text-right"><%= t(:address_id, scope: [:activerecord, :attributes, :user]) %></th>
+          <th class="text-right" style="width:100px"><%= t(:orders_count, scope: [:activerecord, :attributes, :user]) %></th>
           <th class="text-right"><%= t(:updated_at, scope: [:activerecord, :attributes, :user]) %></th>
           <% if can?(:update, User) || can?(:delete, User) %>
             <th class="text-center"><%= t(:manage) %></th>
@@ -51,13 +51,7 @@
                   <%= link_to user.phone,admin_user_path(user) %>
                 <% end  %>
               </td>
-              <td class="text-right">
-                <% if user.address.present? %>
-                  <%= address %>
-                <% else %>
-                  <%= t(:not_insert) %>
-                <% end %>
-              </td>
+              <td class="text-right"><%= user.address.title %></td>
               <td class="text-right"><%=  user.orders_count %></td>
               <td class="text-right"><%= I18n.l user.created_at.to_date, :format => :long %></td>
               <% if can?(:update, user) or can?(:delete, user) %>

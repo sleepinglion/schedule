@@ -75,6 +75,6 @@ class Admin::OperatorsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def operator_params
-        params.require(:operator).permit(:email, :password, :password_confirmation, :enable)
+        params.require(:operator).permit(:id, :email, :password, :password_confirmation, :enable)
     end
 end

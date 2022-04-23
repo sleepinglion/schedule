@@ -1,0 +1,31 @@
+<section id="show-address" class="container">
+  <div class="row">
+    <%= render :partial => 'layouts/notice', :locals => { :errors => @address.errors, :notice => notice, :alert => alert } %>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <article class="card">
+        <h3 class="card-header"><%=@address.title %></h3>
+        <div class="card-body">
+          <dl>
+            <dt><%= t(:users_count, scope: [:activerecord, :attributes, :address]) %></dt>
+            <dd><%= @address.users_count %></dd>
+            <dt><%= t(:created_at, scope: [:activerecord, :attributes, :address]) %></dt>
+            <dd><%= I18n.l @address.created_at.to_date, :format => :long %></dd>
+            <dt><%= t(:updated_at, scope: [:activerecord, :attributes, :receipt]) %></dt>
+            <dd><%= I18n.l @address.updated_at.to_date, :format => :long %></dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-xl-6">
+      <%= link_to t(:link_list), admin_addresses_path, class: 'btn btn-secondary' %>
+    </div>
+    <div class="col-12 col-xl-6 text-right">
+      <%= link_to t(:edit), edit_admin_address_path(@address), class: 'btn btn-secondary' %>
+      <%= link_to t(:delete), admin_address_path(@address), class: 'btn btn-danger' %>
+    </div>
+  </div>
+</section>

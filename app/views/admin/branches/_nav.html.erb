@@ -1,6 +1,8 @@
 <%
   a_class = 'nav-link'
   b_class = 'nav-link'
+  c_class = 'nav-link'
+  d_class = 'nav-link'
 
   if params[:controller] == 'admin/branches'
     a_class += ' active'
@@ -9,12 +11,22 @@
   if params[:controller] == 'admin/receipts'
     b_class += ' active'
   end
+
+  if params[:controller] == 'admin/address_categories'
+    c_class += ' active'
+  end
+
+  if params[:controller] == 'admin/addresses'
+    d_class += ' active'
+  end
 %>
 <div class="col-12">
   <nav class="sub-nav">
     <ul class="nav nav-pills">
       <li class="nav-item"><%= link_to t(:branch, scope: [:activerecord, :models]), admin_branches_path, { :class => a_class } %></li>
       <li class="nav-item"><%= link_to t(:receipt, scope: [:activerecord, :models]), admin_receipts_path, { :class => b_class } %></li>
+      <li class="nav-item"><%= link_to t(:address_category, scope: [:activerecord, :models]), admin_address_categories_path, { :class => c_class } %></li>
+      <li class="nav-item"><%= link_to t(:address, scope: [:activerecord, :models]), admin_addresses_path, { :class => d_class } %></li>
     </ul>
   </nav>
 </div>

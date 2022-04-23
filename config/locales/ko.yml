@@ -94,6 +94,8 @@ ko:
 
   no_data : '해당 데이터가 없습니다.'
   not_insert : '미입력'
+  there_are_n_address_categories : "주소분류가 <strong class=\"mark\">%{count}개</strong> 있습니다"
+  there_are_n_addresses : "주소가 <strong class=\"mark\">%{count}개</strong> 있습니다"
   there_are_n_accounts: "정산 내역이 <strong class=\"mark\">%{count}개</strong> 있습니다"
   there_are_n_orders: "주문 내역이 <strong class=\"mark\">%{count}개</strong> 있습니다"
   there_are_n_branches : "지점이 <strong class=\"mark\">%{count}개</strong> 있습니다"
@@ -137,6 +139,10 @@ ko:
   edit_order: '주문수정'
   new_receipt: '영수증등록'
   edit_receipt: '영수증수정'
+  new_address_category: '주소분류등록'
+  edit_address_category: '주소분류수정'
+  new_address: '주소등록'
+  edit_address: '주소수정'
 
   devise:
     confirmations:
@@ -388,6 +394,8 @@ ko:
       <<: *errors
   activerecord:
     models:
+      address: '주소'
+      address_category: '주소분류'
       branch: '지점'
       order: '주문'
       user: '회원'
@@ -415,6 +423,19 @@ ko:
         enable : '사용여부'
         updated_at : '수정일'
         created_at : '작성일'
+      address_category :
+        title : '주소분류'
+        addresses_count : '주소수'
+        enable: '활성'
+        updated_at: '수정일'
+        created_at: '작성일'
+      address :
+        title : '주소'
+        address_category_id : '주소분류'
+        users_count : '회원수'
+        enable: '활성'
+        updated_at: '수정일'
+        created_at: '작성일'
       account :
         account_category_id : '거래내용'
         user_id : '사용자'
@@ -448,9 +469,7 @@ ko:
       user :
         name : '이름'
         phone : '전화번호'
-        email : 'E-mail'
-        birthday : '생일'
-        address : '주소'
+        address_id : '주소'
         orders_count : '주문수'
         enable : '활성'
         updated_at : '수정일'

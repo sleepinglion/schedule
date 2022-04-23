@@ -3,7 +3,7 @@
   <% if ['admin/users','admin/operators'].include?(params[:controller]) %>
     <%= render 'admin/users/nav' %>
   <% end %>
-  <% if ['admin/branches','admin/receipts'].include?(params[:controller]) %>
+  <% if ['admin/branches','admin/receipts','admin/addresses','admin/address_categories'].include?(params[:controller]) %>
     <%= render 'admin/branches/nav' %>
   <% end %>
   <ul id="top-menu">

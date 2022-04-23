@@ -23,7 +23,7 @@
         <%= link_to raw('<i class="material-icons">group</i>'+t(:user, scope: [:activerecord, :models])+','+t(:operator, scope: [:activerecord, :models])),admin_users_path,:class => "nav-link"  %>
       </li>
       <li class="nav-item
-            <% if ['admin/branches','admin/receipts'].include?(params[:controller]) %> active
+            <% if ['admin/branches','admin/receipts','admin/addresses','admin/address_categories'].include?(params[:controller]) %> active
             <% end %>">
         <%= link_to raw('<i class="material-icons">settings</i>'+t(:setting)),admin_branches_path,:class => "nav-link"  %>
       </li>

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   scope 'admin', module: 'admin', as: 'admin' do
     get '/' => 'admin_home#index'
 
+    resources :address_categories
+    resources :addresses
     resources :accounts
     resources :users
     resources :orders

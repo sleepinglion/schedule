@@ -267,13 +267,13 @@ footer address {margin:0;padding:12px 0 0;line-height:150%;text-align:center}
 @media (min-width:746px) {
   #main-menu h1 {margin-top:20px}
   #main-menu nav {margin-top:50px}
-  #main-menu {height:100vh}
+  #main-menu {min-height:100vh}
   #main-menu li a {border-top-left-radius:20px;border-bottom-left-radius:20px}
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   header {height:5em}
-  #mom {padding-top:0;padding-bottom:0;margin-top:-5em;margin-bottom:-3em;min-height:100%}
+  #mom {padding-top:0;padding-bottom:0;margin-top:-5em;margin-bottom:-3em;min-height:100hv}
   #anon_body #mom {margin-top:0}
   #main {padding-top:5em;padding-bottom:3em}
   #anon_body #main {padding-top:0;float:left;width:100%;}
@@ -304,7 +304,7 @@ footer address {margin:0;padding:12px 0 0;line-height:150%;text-align:center}
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
   }
 
-  #mom {padding-top:0;padding-bottom:0;margin-top:-5em;margin-bottom:-3em;min-height:100%}
+  #mom {padding-top:0;padding-bottom:0;margin-top:-5em;margin-bottom:-3em;min-height:100vh}
   #anon_body #mom {margin-top:0}
   #main {padding-top:5em;padding-bottom:3em}
   #anon_body #main {padding-top:0;float:left;width:100%;}
