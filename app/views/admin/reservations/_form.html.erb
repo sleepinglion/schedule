@@ -3,7 +3,7 @@
     <div class="card-body">
       <div class="form-row">
         <div class="col-12 form-group">
-          <%= form.label :order_title %>
+          <%= form.label :order_id %>
           <%= form.select :order_id,options_from_collection_for_select(Order.where(:enable=>true).all, 'id', 'title',reservation.order),{},{:class=>"form-control"} %>
         </div>
         <div class="col-12 form-group">

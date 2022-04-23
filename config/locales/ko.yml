@@ -463,6 +463,13 @@ ko:
         enable: '활성'
         updated_at: '수정일'
         created_at: '작성일'
+      reservation :
+        order_id : '주문'
+        start_datetime : '시작시간'
+        end_datetime : '종료시간'
+        enable : '보임'
+        updated_at : '수정일'
+        created_at : '작성일'
     errors:
       models :
         user :

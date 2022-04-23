@@ -14,14 +14,16 @@
         <colgroup>
           <col>
           <col>
+          <col>
           <% if can?(:update, Reservation) or can?(:delete, Reservation) %>
             <col<%= manage_width(Reservation) %>>
           <% end %>
         </colgroup>
         <thead class="thead-default">
         <tr>
-          <th><%= t(:title, scope: [:activerecord, :attributes, :branch]) %></th>
-          <th><%= t(:description, scope: [:activerecord, :attributes, :branch]) %></th>
+          <th><%= t(:order_id, scope: [:activerecord, :attributes, :reservation]) %></th>
+          <th><%= t(:start_datetime, scope: [:activerecord, :attributes, :reservation]) %></th>
+          <th><%= t(:end_datetime, scope: [:activerecord, :attributes, :reservation]) %></th>
           <th class="text-center"><%= t(:manage) %></th>
         </tr>
         </thead>
@@ -29,11 +31,9 @@
         <% unless @reservations.empty? %>
           <% @reservations.each_with_index do |reservation, index| %>
             <tr>
-              <td>
-                <%=reservation.order.title %>
-              </td>
-              <td>
-              </td>
+              <td><%= link_to reservation.order.title,admin_reservation_path(reservation) %>
+              <td><%= I18n.l reservation.start_datetime, :format => :long %></td>
+              <td><%= I18n.l reservation.end_datetime, :format => :long %></td>
               <% if can?(:update, reservation) or can?(:delete, reservation) %>
                 <td class="text-center">
                   <% if can? :update, reservation %>
