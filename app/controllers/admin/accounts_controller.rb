@@ -6,18 +6,31 @@ class Admin::AccountsController < Admin::AdminController
   def index
     params[:per_page] = 10 unless params[:per_page].present?
 
-    condition = { enable: true }
+    condition_sql = '1=1'
+    sql_params = []
 
-    if params[:product_category_id].present?
-      condition[:products] = { :product_category_id => params[:product_category_id] }
+    if params[:order_id].present?
+      condition_sql += " AND order_id=?"
+      sql_params << params[:order_id]
     end
 
-    if params[:product_id].present?
-      condition[:products] = { :id => params[:product_id] }
+    if params[:account_category_id].present?
+      condition_sql += " AND account_category_id=?"
+      sql_params << params[:account_category_id]
     end
 
-    @account_count = Account.where(condition).group('accounts.id').count.count
-    @accounts = Account.where(condition).page(params[:page]).per(params[:per_page]).group('accounts.id').order('id desc');
+    if params[:start_date].present?
+      condition_sql += " AND transaction_date>=?"
+      sql_params << params[:start_date].to_date
+    end
+
+    if params[:end_date].present?
+      condition_sql += " AND transaction_date<=?"
+      sql_params << params[:end_date].to_date
+    end
+
+    @account_count = Account.where(condition_sql, *sql_params).count
+    @accounts = Account.where(condition_sql, *sql_params).page(params[:page]).per(params[:per_page]).order('id desc');
   end
 
   # GET /Accounts/1

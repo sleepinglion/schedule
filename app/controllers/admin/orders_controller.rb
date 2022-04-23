@@ -6,13 +6,36 @@ class Admin::OrdersController < Admin::AdminController
   def index
     params[:per_page] = 10 unless params[:per_page].present?
 
-    @order_count = Order.count
-    @orders = Order.order('id desc').page(params[:page]).per(params[:per_page])
+    condition_sql = '1=1'
+    sql_params = []
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @orders }
+    if params[:user_id].present?
+      condition_sql += " AND user_id=?"
+      sql_params << params[:user_id]
     end
+
+    if params[:branch_id].present?
+      condition_sql += " AND branch_id=?"
+      sql_params << params[:branch_id]
+    end
+
+    if params[:receipt_id].present?
+      condition_sql += " AND receipt_id=?"
+      sql_params << params[:receipt_id]
+    end
+
+    if params[:start_date].present?
+      condition_sql += " AND transaction_date>=?"
+      sql_params << params[:start_date].to_date
+    end
+
+    if params[:end_date].present?
+      condition_sql += " AND transaction_date<=?"
+      sql_params << params[:end_date].to_date
+    end
+
+    @order_count = Order.where(condition_sql, *sql_params).count
+    @orders = Order.where(condition_sql, *sql_params).page(params[:page]).per(params[:per_page]).order('id desc')
   end
 
   # GET /order/1

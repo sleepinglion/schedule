@@ -42,17 +42,17 @@
 <div class="card-body">
   <div class="col-12">
     <div class="form-row">
-      <div class="col-12 col-xxl-4 form-group"">
+      <div class="col-12 col-xxl-4 form-group">
     <label for="s_product"><%=t(:user,scope:[:activerecord,:models]) %></label>
-    <%= select_tag :receipt_id,options_from_collection_for_select(User.where(:enable=>true).all, 'id', 'name',nil),{:class=>"form-control",include_blank: t(:all)} %>
+    <%= select_tag :user_id,options_from_collection_for_select(User.where(:enable=>true).all, 'id', 'name',params[:user_id]),{:class=>"form-control",include_blank: t(:all)} %>
       </div>
-      <div class="col-12 col-xl-6 col-xxl-4 form-group"">
+      <div class="col-12 col-xl-6 col-xxl-4 form-group">
         <label for="s_product"><%=t(:branch,scope:[:activerecord,:models]) %></label>
-        <%= select_tag :receipt_id,options_from_collection_for_select(Branch.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+        <%= select_tag :branch_id,options_from_collection_for_select(Branch.where(:enable=>true).all, 'id', 'title',params[:branch_id]),{:class=>"form-control",include_blank: t(:all)} %>
       </div>
-      <div class="col-12 col-xl-6 col-xxl-4 form-group"">
+      <div class="col-12 col-xl-6 col-xxl-4 form-group">
         <label for="s_product"><%=t(:receipt,scope:[:activerecord,:models]) %></label>
-        <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',nil),{:class=>"form-control",include_blank: t(:all)} %>
+        <%= select_tag :receipt_id,options_from_collection_for_select(Receipt.where(:enable=>true).all, 'id', 'title',params[:receipt_id]),{:class=>"form-control",include_blank: t(:all)} %>
       </div>
   </div>
   </div>
