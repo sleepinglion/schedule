@@ -127,6 +127,8 @@ ko:
   order_list : '주문목록'
   user_list : '회원목록'
 
+  new_account: '정산등록'
+  edit_account: '정산수정'
   new_branch: '지점등록'
   edit_branch: '지점수정'
   new_product: '상품등록'
