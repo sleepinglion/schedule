@@ -45,7 +45,11 @@
         <td><%=order.user.name %></td>
         <td><%=order.branch.title %></td>
         <td class="text-right"<% unless order.enable %> style="text-decoration:line-through"<% end %>>
-
+          <% if order.accounts.present? %>
+            <%= link_to number_to_currency(order.total_account_payment),admin_accounts_path(:order_id=>order) %>
+          <% else %>
+            <%= number_to_currency 0 %>
+          <% end %>
         </td>
         <td>
           <% if order.receipt.present? %>

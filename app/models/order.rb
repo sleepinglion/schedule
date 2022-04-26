@@ -7,6 +7,10 @@ class Order < ApplicationRecord
   belongs_to :receipt, counter_cache: true, optional: true
   has_many :accounts
 
+  def total_account_payment
+    self.accounts.sum(:payment)
+  end
+
   private
 
   def default_values

@@ -461,7 +461,7 @@ ko:
         receipt_id : '영수증'
         original_price : '원가'
         discount : '할인'
-        total_price : '판매가'
+        total_payment : '총결제액'
         payment : '결재액'
         contract_date : '계약일'
         updated_at : '수정일'
