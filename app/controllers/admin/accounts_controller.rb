@@ -54,7 +54,7 @@ class Admin::AccountsController < Admin::AdminController
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to [:admin, @account], notice: 'Gg was successfully created.' }
+        format.html { redirect_to [:admin, @account], notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new }
@@ -96,6 +96,6 @@ class Admin::AccountsController < Admin::AdminController
 
   # Only allow a list of trusted parameters through.
   def account_params
-    params.require(:account).permit(:account_category_id, :user_id, :transaction_date, :cash, :credit, :point)
+    params.require(:account).permit(:account_category_id, :order_id, :transaction_date, :payment)
   end
 end
